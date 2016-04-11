@@ -17,8 +17,6 @@
 #define setDriveMotorsRaw(power) motor[rightDriveFront] = power; motor[rightDriveBack] = power
 #define setIntakeMotors(power) setMotorSpeed(rightDriveFront, power); setMotorSpeed(rightDriveBack, power)
 #define setIntakeMotorsRaw(power) motor[rightDriveFront] = power; motor[rightDriveBack] = power
-#define setAllLauncherMotors(power)
-#define setAllLauncherMotorsRaw(power)
 //END AUTO GENERATED MACROS
 
 //Sensor redo
@@ -207,7 +205,7 @@ byte driveQuad(const int ticks)
 
 		wait1Msec(10);
 	}
-	while (abs(pos_PID_GetError(&leftPID)) > 0 || abs(pos_PID_GetError(&rightPID) > 0);
+	while (abs(pos_PID_GetError(&leftPID)) > 0 || abs(pos_PID_GetError(&rightPID)) > 0);
 
 	// //Difference between sides
 	// int rDiff;
