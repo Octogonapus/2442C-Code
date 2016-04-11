@@ -119,7 +119,8 @@ task usercontrol()
 
 	//Launcher variables
 	bool launcherOn = false;
-	int targetVelocity = 0, targetVelocity_Increment = 10;
+	int targetVelocity = 0, targetVelocity_Prev = 0, targetVelocity_Increment = 10;
+	int launcherPower = 0;
 
 	//LCD variables
 	timer lcdTimer;
@@ -132,7 +133,7 @@ task usercontrol()
 
 		if (timer_Repeat(&lcdTimer, 100))
 		{
-			sprintf(lcdLine1, "TV: %d, CV: %d", bangBang_GetTargetVelocity(&bb), bangBang_GetVelocity(&bb));
+			sprintf(lcdLine1, "TV: %d, CV: %d", targetVelocity, bangBang_GetVelocity(&bb));
 			displayLCDCenteredString(0, lcdLine1);
 		}
 
@@ -201,11 +202,22 @@ task usercontrol()
 
 		if (launcherOn)
 		{
-			setMotorSpeed(flyweelY, 127);
-			setMotorSpeed(flywheelSecond, 127);
+			if (targetVelocity != targetVelocity_Prev)
+			{
+				bangBang_SetTargetVelocity(&bb, targetVelocity);
+			}
+
+			targetVelocity_Prev = targetVelocity;
+
+			launcherPower = bangBang_StepController(&bb);
+
+			setMotorSpeed(flyweelY, launcherPower);
+			setMotorSpeed(flywheelSecond, launcherPower);
 		}
 		else
 		{
+			bangBang_StepVelocity(&bb);
+
 			setMotorSpeed(flyweelY, 0);
 			setMotorSpeed(flywheelSecond, 0);
 		}
