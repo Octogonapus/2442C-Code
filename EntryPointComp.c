@@ -64,17 +64,17 @@ void pre_auton()
   initializeSensors();
 
   //Setup velocity controller
-  bangBang_InitController(&bb, launcherQuad, 127, 63);
+  bangBang_InitController(&bb, launcherQuad, 127, 60);
 
   //Setup motors
   addMotor(intakeFeeder, MOTOR_FAST_SLEW_RATE);
-  addMotor(leftDriveFront, 50);
-  addMotor(leftDriveBack, 50);
-  addMotor(rightDriveFront, 50);
-  addMotor(rightDriveBack, 50);
   addMotor(flyweelY, MOTOR_FAST_SLEW_RATE);
-  addMotor(flywheelSecond, MOTOR_FAST_SLEW_RATE);
   addMotor(lpY, MOTOR_FAST_SLEW_RATE);
+  addMotor(rightDriveFront, MOTOR_FAST_SLEW_RATE);
+  addMotor(rightDriveBack, MOTOR_FAST_SLEW_RATE);
+  addMotor(flywheelSecond, MOTOR_FAST_SLEW_RATE);
+  addMotor(leftDriveFront, MOTOR_FAST_SLEW_RATE);
+  addMotor(leftDriveBack, MOTOR_FAST_SLEW_RATE);
   addMotor(lpSecond, MOTOR_FAST_SLEW_RATE);
   addMotor(intakeDrum, MOTOR_FAST_SLEW_RATE);
 
